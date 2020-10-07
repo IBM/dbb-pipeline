@@ -1,0 +1,934 @@
+{
+    "name": "GenApp-Deploy",
+    "description": "",
+    "enforceCompleteSnapshots": false,
+    "propSheet": {"properties": []},
+    "templatePropSheet": {
+        "name": "template",
+        "properties": []
+    },
+    "components": [{
+        "name": "GenAppComponent",
+        "description": "",
+        "created": 1596115621657,
+        "componentType": "ZOS",
+        "ignoreQualifiers": 0,
+        "importAutomatically": false,
+        "useVfs": true,
+        "active": true,
+        "deleted": false,
+        "defaultVersionType": "INCREMENTAL",
+        "cleanupDaysToKeep": 0,
+        "cleanupCountToKeep": 0,
+        "envPropDefs": [],
+        "resPropDefs": [],
+        "versionPropDefs": [
+            {
+                "name": "ucd.repository.type",
+                "label": "ucd.repository.type",
+                "pattern": "",
+                "type": "TEXT",
+                "value": "HFS",
+                "required": false,
+                "description": "Do not modify or delete",
+                "placeholder": ""
+            },
+            {
+                "name": "extRepoURL",
+                "label": "extRepoURL",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "nazare-demo-genapp-openshift-build.20200729.114753.047",
+                "label": "nazare-demo-genapp-openshift-build.20200729.114753.047",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "nazare-demo-genapp-openshift-build.20200730.085459.054",
+                "label": "nazare-demo-genapp-openshift-build.20200730.085459.054",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "nazare-demo-genapp-openshift-build.20200730.085621.056",
+                "label": "nazare-demo-genapp-openshift-build.20200730.085621.056",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.103826.038",
+                "label": "cics-genapp-master-build.20200730.103826.038",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.104249.042",
+                "label": "cics-genapp-master-build.20200730.104249.042",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.110801.008",
+                "label": "cics-genapp-master-build.20200730.110801.008",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.111445.014",
+                "label": "cics-genapp-master-build.20200730.111445.014",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.111718.017",
+                "label": "cics-genapp-master-build.20200730.111718.017",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.112641.026",
+                "label": "cics-genapp-master-build.20200730.112641.026",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.113221.032",
+                "label": "cics-genapp-master-build.20200730.113221.032",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.113447.034",
+                "label": "cics-genapp-master-build.20200730.113447.034",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.125135.051",
+                "label": "cics-genapp-master-build.20200730.125135.051",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.125509.055",
+                "label": "cics-genapp-master-build.20200730.125509.055",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.010152.001",
+                "label": "cics-genapp-master-build.20200730.010152.001",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.024034.040",
+                "label": "cics-genapp-master-build.20200730.024034.040",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.025958.059",
+                "label": "cics-genapp-master-build.20200730.025958.059",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.030449.004",
+                "label": "cics-genapp-master-build.20200730.030449.004",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.031859.018",
+                "label": "cics-genapp-master-build.20200730.031859.018",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.032343.023",
+                "label": "cics-genapp-master-build.20200730.032343.023",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.040322.003",
+                "label": "cics-genapp-master-build.20200730.040322.003",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200730.051110.011",
+                "label": "cics-genapp-master-build.20200730.051110.011",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.020149.001",
+                "label": "cics-genapp-master-build.20200731.020149.001",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.025215.052",
+                "label": "cics-genapp-master-build.20200731.025215.052",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.052757.027",
+                "label": "cics-genapp-master-build.20200731.052757.027",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.054556.045",
+                "label": "cics-genapp-master-build.20200731.054556.045",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.054947.049",
+                "label": "cics-genapp-master-build.20200731.054947.049",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            },
+            {
+                "name": "cics-genapp-master-build.20200731.055702.057",
+                "label": "cics-genapp-master-build.20200731.055702.057",
+                "pattern": "",
+                "type": "TEXT",
+                "required": false,
+                "description": "",
+                "placeholder": ""
+            }
+        ],
+        "propSheetGroup": {"propSheets": [
+            {
+                "name": "template",
+                "properties": []
+            },
+            {
+                "name": "custom",
+                "properties": []
+            }
+        ]},
+        "processes": [{
+            "name": "Deploy",
+            "description": "",
+            "defaultWorkingDir": "${p:resource\/work.dir}\/${p:component.name}",
+            "takesVersion": true,
+            "inventoryActionType": "ADD",
+            "status": "Active",
+            "configActionType": "ADD",
+            "active": true,
+            "path": "components\/1739fe79-7327-acd1-5bb5-f1520d9fef1f\/processes\/1739fe79-743f-6d32-e365-d63fb7e06d2e",
+            "deleted": false,
+            "propDefs": [],
+            "rootActivity": {
+                "edges": [
+                    {
+                        "to": "8d95d23d05de73e766f497c7cf4771",
+                        "from": "New copy resources",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "Submit Job",
+                        "from": "Generate Bind Package",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "Generate Bind Package",
+                        "from": "Deploy Data Sets",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "Deploy Data Sets",
+                        "from": "Download Artifacts for zOS External Repo",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "New copy resources",
+                        "from": "Submit Job",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "Generate Load Module List",
+                        "from": "Deploy Data Sets",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "Download Artifacts for zOS External Repo",
+                        "type": "ALWAYS",
+                        "value": ""
+                    },
+                    {
+                        "to": "New copy resources",
+                        "from": "Generate Load Module List",
+                        "type": "SUCCESS",
+                        "value": ""
+                    }
+                ],
+                "offsets": [
+                    {
+                        "name": "Download Artifacts for zOS External Repo",
+                        "x": -180,
+                        "y": 140,
+                        "h": 80,
+                        "w": 480
+                    },
+                    {
+                        "name": "Generate Load Module List",
+                        "x": -335,
+                        "y": 400,
+                        "h": 80,
+                        "w": 380
+                    },
+                    {
+                        "name": "New copy resources",
+                        "x": -102.70690443529946,
+                        "y": 660,
+                        "h": 80,
+                        "w": 320
+                    },
+                    {
+                        "name": "Submit Job",
+                        "x": 40.469821673525416,
+                        "y": 530,
+                        "h": 80,
+                        "w": 240
+                    },
+                    {
+                        "name": "8d95d23d05de73e766f497c7cf4771",
+                        "x": -7.706904435299464,
+                        "y": 790,
+                        "h": 90,
+                        "w": 130
+                    },
+                    {
+                        "name": "Generate Bind Package",
+                        "x": 75,
+                        "y": 400,
+                        "h": 80,
+                        "w": 380
+                    },
+                    {
+                        "name": "Deploy Data Sets",
+                        "x": -85,
+                        "y": 270,
+                        "h": 80,
+                        "w": 290
+                    }
+                ],
+                "layoutMode": "auto",
+                "type": "graph",
+                "name": "93daae47-7127-4a6d-bc71-8ab480193355",
+                "children": [
+                    {
+                        "type": "finish",
+                        "name": "8d95d23d05de73e766f497c7cf4771",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 5,
+                        "commandName": "Download Artifacts for zOS External Repo",
+                        "pluginName": "zOS Utility to download external artifacts",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "extRepoURL": "${p:extRepoURL}",
+                            "username": "${p:artifactory.user}",
+                            "password": "${p:artifactory.password}",
+                            "apiKeyCheckBox": "false",
+                            "apiKey": "",
+                            "versionName": "${p:version.name}",
+                            "resourceId": "${p:resource.id}",
+                            "proxyCheckBox": "false",
+                            "httpProxyHost": "",
+                            "httpProxyPort": ""
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "Download Artifacts for zOS External Repo",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 51,
+                        "commandName": "Deploy Data Sets",
+                        "pluginName": "zOS Utility",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "pdsMapping": "${p?:deploy.env.pds.mapping}",
+                            "incrementalMode": "FULL",
+                            "deleteCurrentContents": "false",
+                            "checkAccess": "true",
+                            "doBackup": "true",
+                            "allowCreateDataset": "TRUE",
+                            "hfsTargetDir": "${p?:deploy.env.hfs.targetdir}",
+                            "allowCreateDirectory": "TRUE",
+                            "deployBasePath": "${BUZ_DEPLOY_BASE}",
+                            "tempDsnPrefix": "${p?:BUZ_TMP_DSN_PREFIX}",
+                            "versionMerge": "${p?:version\/ucd.version.ismerged}",
+                            "versionName": "${p:version.name}",
+                            "versionId": "${p:version.id}",
+                            "versionType": "${p:version.type}",
+                            "componentName": "${p:component.name}",
+                            "resourceId": "${p:resource.id}",
+                            "componentId": "${p:component.id}"
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "Deploy Data Sets",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 51,
+                        "commandName": "Generate Artifact Information",
+                        "pluginName": "zOS Utility",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "loopType": "Member",
+                            "orderBy": "ASC",
+                            "srcDatasetName": "",
+                            "datasetName": "",
+                            "memberName": "",
+                            "deployTypeName": "\/.*LOAD*\/",
+                            "custProperties": "",
+                            "templateText": "${member},",
+                            "failOnEmpty": "false",
+                            "deployBasePath": "${BUZ_DEPLOY_BASE}",
+                            "versionName": "${p:version.name}",
+                            "componentName": "${p:component.name}",
+                            "resourceId": "${p:resource.id}"
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "Generate Load Module List",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 41,
+                        "commandName": "New copy resources",
+                        "pluginName": "CICS TS",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "resourceNameList": "${Generate Load Module List\/text}",
+                            "resourceType": "PROGRAM",
+                            "maxRetryTimes": "",
+                            "retryInterval": "",
+                            "hostname": "${p:cics.host}",
+                            "port": "${p:cics.cmciport}",
+                            "cicsplex": "${p?:cics.cicsplex}",
+                            "cicsscope": "${p?:cics.scope}",
+                            "username": "${p?:cics.username}",
+                            "password": "${p?:cics.password}",
+                            "ssl": "${p?:cics.ssl}",
+                            "ks_location": "${p?:cics.kslocation}",
+                            "ks_type": "${p?:cics.kstype}",
+                            "ks_password": "",
+                            "ts_location": "${p?:cics.tslocation}",
+                            "ts_type": "${p?:cics.tstype}",
+                            "ts_password": ""
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "New copy resources",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 51,
+                        "commandName": "Generate Artifact Information",
+                        "pluginName": "zOS Utility",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "loopType": "Member",
+                            "orderBy": "ASC",
+                            "srcDatasetName": "",
+                            "datasetName": "",
+                            "memberName": "",
+                            "deployTypeName": "\/.*DBRM*\/",
+                            "custProperties": "",
+                            "templateText": "BIND  PACKAGE(${p:db2.target.collId}) +\n         MEMBER(${member}) +\n         LIBRARY('${dataset}') +\n         QUALIFIER(${p:db2.target.qualifier}) +\n         OWNER(${p:jes.user}) +\n         ACTION(REPLACE) +\n         ISOLATION(CS) +\n         RELEASE(COMMIT) +\n         ENCODING(EBCDIC)\n",
+                            "failOnEmpty": "false",
+                            "deployBasePath": "${BUZ_DEPLOY_BASE}",
+                            "versionName": "${p:version.name}",
+                            "componentName": "${p:component.name}",
+                            "resourceId": "${p:resource.id}"
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "Generate Bind Package",
+                        "children": []
+                    },
+                    {
+                        "allowFailure": false,
+                        "useImpersonation": false,
+                        "showHidden": false,
+                        "impersonationUseSudo": false,
+                        "pluginVersion": 51,
+                        "commandName": "Submit Job",
+                        "pluginName": "zOS Utility",
+                        "authTokenRestriction": "20000001-0001-0001-0001-000000000000",
+                        "properties": {
+                            "mvsFilename": "",
+                            "ussFilename": "",
+                            "jclString": "\/\/BINDPKG  JOB 'DBB-PKGBIND',MSGLEVEL=(1,1),MSGCLASS=R,NOTIFY=&SYSUID\n\/\/*ROUTE PRINT @JCLPRINT@\n\/\/JOBLIB   DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNEXIT\n\/\/         DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNLOAD\n\/\/*******************************************\n\/\/* PKGBIND\n\/\/* Step bind packages\n\/\/*******************************************\n\/\/**BEGIN\n\/\/PKGBIND EXEC PGM=IKJEFT01,DYNAMNBR=20,COND=(4,LT)\n\/\/SYSTSPRT DD  SYSOUT=*\n\/\/SYSPRINT DD  SYSOUT=*\n\/\/SYSUDUMP DD  SYSOUT=*\n\/\/SYSIN    DD  DUMMY\n\/\/SYSTSIN  DD  *\n   DSN SYSTEM(${p:db2.target.sqlid})\n${Generate Bind Package\/text}\n   END\n\/*\n\/\/*END\n",
+                            "jobCard": "${p?:deploy.env.jobstatement}",
+                            "explicitTokens": "",
+                            "explicitTokensForeachJob": "",
+                            "waitForJob": "true",
+                            "stopOnFail": "true",
+                            "timeout": "60",
+                            "showOutput": "ALL",
+                            "cutOff": "1000",
+                            "maxRC": "4",
+                            "hostname": "${p:jes.host}",
+                            "port": "${p:jes.monitor.port}",
+                            "userid": "${p:jes.user}",
+                            "password": "${p?:jes.password}",
+                            "usePassticket": "true",
+                            "irrracfJarFile": "\/usr\/include\/java_classes\/IRRRacf.jar",
+                            "irrracfLibraryPath": "\/usr\/lib"
+                        },
+                        "cachedAuthTokenRestriction": {
+                            "name": "System Default",
+                            "description": "Used by default for any plugin steps without a specified token restriction",
+                            "restrictions": [{
+                                "verb": "ALL",
+                                "url": "\/*"
+                            }]
+                        },
+                        "type": "plugin",
+                        "name": "Submit Job",
+                        "children": []
+                    }
+                ]
+            }
+        }],
+        "configTemplates": [],
+        "genericProcesses": [],
+        "teamMappings": [],
+        "tags": []
+    }],
+    "environments": [{
+        "name": "Development",
+        "color": "#00B2EF",
+        "requireApprovals": false,
+        "noSelfApprovals": false,
+        "exemptProcesses": [],
+        "lockSnapshots": false,
+        "requireSnapshots": false,
+        "cleanupDaysToKeep": 0,
+        "cleanupCountToKeep": 0,
+        "enableProcessHistoryCleanup": true,
+        "useSystemDefaultDays": true,
+        "historyCleanupDaysToKeep": 365,
+        "order": 0,
+        "active": true,
+        "propSheet": {"properties": [
+            {
+                "name": "cics.cicspex",
+                "value": "YOUR_CICS_CICSPEX",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "cics.cmciport",
+                "value": "YOUR_CICS_CMCIPORT",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "cics.host",
+                "value": "YOUR_CICS_HOST",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "cics.username",
+                "value": "YOUR_CICS_USER",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "cics.password",
+                "value": "YOUR_CICS_PASSWORD",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "deploy.env.pds.mapping",
+                "value": "*.LOAD,YOUR_PDS_FOR_LOAD_MODULES\n*.DBRM,YOUR_PDS_FOR_DBRM",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "db2.hlq",
+                "value": "YOUR_DB2_HLQ",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "db2.target.sqlid",
+                "value": "YOUR_DB2_SQLID",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "jes.user",
+                "value": "YOUR_ZOS_USERID",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "jes.password",
+                "value": "YOUR_ZOS_PASSWORD",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "jes.host",
+                "value": "YOUR_ZOS_HOST",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "jes.monitor.port",
+                "value": "YOUR_ZOS_JOBMONITOR_PORT",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "db2.target.collId",
+                "value": "YOUR_GENAPP_DB2_COLLECTION_ID",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "db2.target.qualifier",
+                "value": "YOUR_GENAPP_DB2_QUALIFIER",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "artifactory.user",
+                "value": "YOUR_ARTI_USER",
+                "description": "",
+                "secure": false
+            },
+            {
+                "name": "artifactory.password",
+                "value": "YOUR_ARTI_PASSWORD",
+                "description": "",
+                "secure": false
+            }
+        ]},
+        "templatePropSheet": {
+            "name": "template",
+            "properties": []
+        },
+        "baseResources": [{
+            "basePath": "",
+            "tree": {
+                "name": "GenAppResource",
+                "path": "\/GenAppResource",
+                "description": "GenApp Resource",
+                "parentName": "",
+                "inheritTeam": false,
+                "propSheet": {
+                    "name": "custom",
+                    "properties": []
+                },
+                "tags": [],
+                "teamMappings": [],
+                "impersonationUseSudo": false,
+                "impersonationForce": false,
+                "prototype": false
+            }
+        }],
+        "baseResourcesFull": [{
+            "basePath": "",
+            "tree": {
+                "name": "GenAppResource",
+                "path": "\/GenAppResource",
+                "description": "GenApp Resource",
+                "parentName": "",
+                "inheritTeam": false,
+                "propSheet": {
+                    "name": "custom",
+                    "properties": []
+                },
+                "tags": [],
+                "teamMappings": [],
+                "impersonationUseSudo": false,
+                "impersonationForce": false,
+                "prototype": false,
+                "children": [{
+                    "name": "e2e-pipeline",
+                    "path": "\/GenAppResource\/e2e-pipeline",
+                    "description": "",
+                    "parentName": "GenAppResource",
+                    "inheritTeam": true,
+                    "type": "agent",
+                    "typeName": "e2e-pipeline",
+                    "propSheet": {
+                        "name": "custom",
+                        "properties": []
+                    },
+                    "tags": [],
+                    "teamMappings": [],
+                    "impersonationUseSudo": false,
+                    "impersonationForce": false,
+                    "prototype": false,
+                    "children": [{
+                        "name": "GenAppComponent",
+                        "path": "\/GenAppResource\/e2e-pipeline\/GenAppComponent",
+                        "description": "",
+                        "parentName": "e2e-pipeline",
+                        "inheritTeam": true,
+                        "roleName": "GenAppComponent",
+                        "roleProperties": {
+                            "name": "GenAppComponent",
+                            "properties": []
+                        },
+                        "propSheet": {
+                            "name": "custom",
+                            "properties": []
+                        },
+                        "tags": [],
+                        "teamMappings": [],
+                        "impersonationUseSudo": false,
+                        "impersonationForce": false,
+                        "prototype": false,
+                        "children": []
+                    }]
+                }]
+            }
+        }],
+        "componentPropSheets": [{
+            "properties": [],
+            "componentName": "GenAppComponent"
+        }],
+        "teamMappings": []
+    }],
+    "processes": [{
+        "name": "Deploy",
+        "description": "",
+        "inventoryManagementType": "AUTOMATIC",
+        "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+        "rootActivity": {
+            "edges": [
+                {
+                    "to": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "type": "ALWAYS",
+                    "value": ""
+                },
+                {
+                    "to": "fe58debdd30d231c24fd724756acff",
+                    "from": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "type": "SUCCESS",
+                    "value": ""
+                }
+            ],
+            "offsets": [
+                {
+                    "name": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "x": -50,
+                    "y": 230,
+                    "h": 70,
+                    "w": 280
+                },
+                {
+                    "name": "fe58debdd30d231c24fd724756acff",
+                    "x": -5,
+                    "y": 430,
+                    "h": 80,
+                    "w": 120
+                }
+            ],
+            "layoutMode": "auto",
+            "type": "graph",
+            "name": "2d4d2005-c80f-4a9e-8fd4-69b0997107ec",
+            "children": [
+                {
+                    "type": "finish",
+                    "name": "fe58debdd30d231c24fd724756acff",
+                    "children": []
+                },
+                {
+                    "componentName": "GenAppComponent",
+                    "properties": [{
+                        "name": "isIgnoreChildWarnings",
+                        "value": "false"
+                    }],
+                    "type": "componentEnvironmentIterator",
+                    "name": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "children": [{
+                        "componentName": "GenAppComponent",
+                        "status": "Active",
+                        "type": "inventoryVersionDiff",
+                        "name": "50fd6f3c-9c6e-433f-ac5d-9d008d447ebf",
+                        "children": [{
+                            "componentProcessName": "Deploy",
+                            "componentName": "GenAppComponent",
+                            "allowFailure": false,
+                            "properties": {"isIgnoreChildWarnings": "false"},
+                            "draftProperties": {"isIgnoreChildWarnings": "false"},
+                            "type": "componentProcess",
+                            "name": "Install: \"GenAppComponent \"",
+                            "children": []
+                        }]
+                    }]
+                }
+            ]
+        },
+        "propDefs": [],
+        "versionPresets": []
+    }],
+    "genericProcesses": [],
+    "teamMappings": [],
+    "tags": []
+}
