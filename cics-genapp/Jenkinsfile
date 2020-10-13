@@ -7,7 +7,7 @@ def srcGitRepo =  null
 def srcGitBranch = null
 def zAppBuildGitRepo = 'https://github.com/IBM/dbb-zappbuild.git'
 def zAppBuildGitBranch = 'development' // Some important issues are not yet merged into master.
-def dbbGitRepo = 'https://github.com/IBM/dbb'
+def dbbGitRepo = 'https://github.com/IBM/dbb.git'
 def dbbGitBranch = 'master'
 
 // DBB
@@ -39,7 +39,7 @@ def buildVerbose = verbose ? '-v' : ''
 @NonCPS
 String getArtifactoruUrl(String artiUrl) {
     // UCD always add /artifactory
-    def exp =  /(.*)\\/artifactory.*/
+    def exp =  /(.*)\\/artifactory?$/
     def match = artiUrl =~ exp
     if (match.find()) {
         return match.group(1)

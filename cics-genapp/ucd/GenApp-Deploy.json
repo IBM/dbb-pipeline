@@ -22,270 +22,6 @@
         "cleanupCountToKeep": 0,
         "envPropDefs": [],
         "resPropDefs": [],
-        "versionPropDefs": [
-            {
-                "name": "ucd.repository.type",
-                "label": "ucd.repository.type",
-                "pattern": "",
-                "type": "TEXT",
-                "value": "HFS",
-                "required": false,
-                "description": "Do not modify or delete",
-                "placeholder": ""
-            },
-            {
-                "name": "extRepoURL",
-                "label": "extRepoURL",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "nazare-demo-genapp-openshift-build.20200729.114753.047",
-                "label": "nazare-demo-genapp-openshift-build.20200729.114753.047",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "nazare-demo-genapp-openshift-build.20200730.085459.054",
-                "label": "nazare-demo-genapp-openshift-build.20200730.085459.054",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "nazare-demo-genapp-openshift-build.20200730.085621.056",
-                "label": "nazare-demo-genapp-openshift-build.20200730.085621.056",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.103826.038",
-                "label": "cics-genapp-master-build.20200730.103826.038",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.104249.042",
-                "label": "cics-genapp-master-build.20200730.104249.042",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.110801.008",
-                "label": "cics-genapp-master-build.20200730.110801.008",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.111445.014",
-                "label": "cics-genapp-master-build.20200730.111445.014",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.111718.017",
-                "label": "cics-genapp-master-build.20200730.111718.017",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.112641.026",
-                "label": "cics-genapp-master-build.20200730.112641.026",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.113221.032",
-                "label": "cics-genapp-master-build.20200730.113221.032",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.113447.034",
-                "label": "cics-genapp-master-build.20200730.113447.034",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.125135.051",
-                "label": "cics-genapp-master-build.20200730.125135.051",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.125509.055",
-                "label": "cics-genapp-master-build.20200730.125509.055",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.010152.001",
-                "label": "cics-genapp-master-build.20200730.010152.001",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.024034.040",
-                "label": "cics-genapp-master-build.20200730.024034.040",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.025958.059",
-                "label": "cics-genapp-master-build.20200730.025958.059",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.030449.004",
-                "label": "cics-genapp-master-build.20200730.030449.004",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.031859.018",
-                "label": "cics-genapp-master-build.20200730.031859.018",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.032343.023",
-                "label": "cics-genapp-master-build.20200730.032343.023",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.040322.003",
-                "label": "cics-genapp-master-build.20200730.040322.003",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200730.051110.011",
-                "label": "cics-genapp-master-build.20200730.051110.011",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.020149.001",
-                "label": "cics-genapp-master-build.20200731.020149.001",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.025215.052",
-                "label": "cics-genapp-master-build.20200731.025215.052",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.052757.027",
-                "label": "cics-genapp-master-build.20200731.052757.027",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.054556.045",
-                "label": "cics-genapp-master-build.20200731.054556.045",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.054947.049",
-                "label": "cics-genapp-master-build.20200731.054947.049",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            },
-            {
-                "name": "cics-genapp-master-build.20200731.055702.057",
-                "label": "cics-genapp-master-build.20200731.055702.057",
-                "pattern": "",
-                "type": "TEXT",
-                "required": false,
-                "description": "",
-                "placeholder": ""
-            }
-        ],
         "propSheetGroup": {"propSheets": [
             {
                 "name": "template",
@@ -305,17 +41,11 @@
             "status": "Active",
             "configActionType": "ADD",
             "active": true,
-            "path": "components\/1739fe79-7327-acd1-5bb5-f1520d9fef1f\/processes\/1739fe79-743f-6d32-e365-d63fb7e06d2e",
+            "path": "components\/17501fd7-29e8-60a2-e89b-bf658ec459e7\/processes\/17501fe3-6a41-a6d6-3fb4-7aa6b4b0a6e3",
             "deleted": false,
             "propDefs": [],
             "rootActivity": {
                 "edges": [
-                    {
-                        "to": "8d95d23d05de73e766f497c7cf4771",
-                        "from": "New copy resources",
-                        "type": "SUCCESS",
-                        "value": ""
-                    },
                     {
                         "to": "Submit Job",
                         "from": "Generate Bind Package",
@@ -329,14 +59,20 @@
                         "value": ""
                     },
                     {
-                        "to": "Deploy Data Sets",
-                        "from": "Download Artifacts for zOS External Repo",
+                        "to": "New copy resources",
+                        "from": "Submit Job",
                         "type": "SUCCESS",
                         "value": ""
                     },
                     {
                         "to": "New copy resources",
-                        "from": "Submit Job",
+                        "from": "Generate Load Module List",
+                        "type": "SUCCESS",
+                        "value": ""
+                    },
+                    {
+                        "to": "bf06b4de022246dd6d884557a4fd5b",
+                        "from": "New copy resources",
                         "type": "SUCCESS",
                         "value": ""
                     },
@@ -352,8 +88,8 @@
                         "value": ""
                     },
                     {
-                        "to": "New copy resources",
-                        "from": "Generate Load Module List",
+                        "to": "Deploy Data Sets",
+                        "from": "Download Artifacts for zOS External Repo",
                         "type": "SUCCESS",
                         "value": ""
                     }
@@ -367,39 +103,18 @@
                         "w": 480
                     },
                     {
-                        "name": "Generate Load Module List",
+                        "name": "Generate Bind Package",
                         "x": -335,
                         "y": 400,
                         "h": 80,
                         "w": 380
                     },
                     {
-                        "name": "New copy resources",
-                        "x": -102.70690443529946,
-                        "y": 660,
-                        "h": 80,
-                        "w": 320
-                    },
-                    {
                         "name": "Submit Job",
-                        "x": 40.469821673525416,
+                        "x": -159.86625514403283,
                         "y": 530,
                         "h": 80,
                         "w": 240
-                    },
-                    {
-                        "name": "8d95d23d05de73e766f497c7cf4771",
-                        "x": -7.706904435299464,
-                        "y": 790,
-                        "h": 90,
-                        "w": 130
-                    },
-                    {
-                        "name": "Generate Bind Package",
-                        "x": 75,
-                        "y": 400,
-                        "h": 80,
-                        "w": 380
                     },
                     {
                         "name": "Deploy Data Sets",
@@ -407,15 +122,36 @@
                         "y": 270,
                         "h": 80,
                         "w": 290
+                    },
+                    {
+                        "name": "bf06b4de022246dd6d884557a4fd5b",
+                        "x": -1.488340192043779,
+                        "y": 790,
+                        "h": 90,
+                        "w": 130
+                    },
+                    {
+                        "name": "Generate Load Module List",
+                        "x": 75,
+                        "y": 400,
+                        "h": 80,
+                        "w": 380
+                    },
+                    {
+                        "name": "New copy resources",
+                        "x": -96.48834019204378,
+                        "y": 660,
+                        "h": 80,
+                        "w": 320
                     }
                 ],
                 "layoutMode": "auto",
                 "type": "graph",
-                "name": "93daae47-7127-4a6d-bc71-8ab480193355",
+                "name": "3cf2ac15-888f-4c90-adf9-5cad1561493e",
                 "children": [
                     {
                         "type": "finish",
-                        "name": "8d95d23d05de73e766f497c7cf4771",
+                        "name": "bf06b4de022246dd6d884557a4fd5b",
                         "children": []
                     },
                     {
@@ -565,7 +301,8 @@
                         },
                         "type": "plugin",
                         "name": "New copy resources",
-                        "children": []
+                        "children": [],
+                        "preconditionScript": "properties.get(\"Generate Load Module List\/text\") !== undefined &&\nproperties.get(\"Generate Load Module List\/text\") !== null &&\nproperties.get(\"Generate Load Module List\/text\") != \"\""
                     },
                     {
                         "allowFailure": false,
@@ -584,7 +321,7 @@
                             "memberName": "",
                             "deployTypeName": "\/.*DBRM*\/",
                             "custProperties": "",
-                            "templateText": "BIND  PACKAGE(${p:db2.target.collId}) +\n         MEMBER(${member}) +\n         LIBRARY('${dataset}') +\n         QUALIFIER(${p:db2.target.qualifier}) +\n         OWNER(${p:jes.user}) +\n         ACTION(REPLACE) +\n         ISOLATION(CS) +\n         RELEASE(COMMIT) +\n         ENCODING(EBCDIC)\n",
+                            "templateText": "BIND  PACKAGE(${p:db2.target.collId}) +\n   MEMBER(${member}) +\n   LIBRARY('${dataset}') +\n   QUALIFIER(${p:db2.target.qualifier}) +\n   OWNER(${p:jes.user}) +\n   ACTION(REPLACE) +\n   ISOLATION(CS) +\n   RELEASE(COMMIT) +\n   ENCODING(EBCDIC)\n",
                             "failOnEmpty": "false",
                             "deployBasePath": "${BUZ_DEPLOY_BASE}",
                             "versionName": "${p:version.name}",
@@ -615,7 +352,7 @@
                         "properties": {
                             "mvsFilename": "",
                             "ussFilename": "",
-                            "jclString": "\/\/BINDPKG  JOB 'DBB-PKGBIND',MSGLEVEL=(1,1),MSGCLASS=R,NOTIFY=&SYSUID\n\/\/*ROUTE PRINT @JCLPRINT@\n\/\/JOBLIB   DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNEXIT\n\/\/         DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNLOAD\n\/\/*******************************************\n\/\/* PKGBIND\n\/\/* Step bind packages\n\/\/*******************************************\n\/\/**BEGIN\n\/\/PKGBIND EXEC PGM=IKJEFT01,DYNAMNBR=20,COND=(4,LT)\n\/\/SYSTSPRT DD  SYSOUT=*\n\/\/SYSPRINT DD  SYSOUT=*\n\/\/SYSUDUMP DD  SYSOUT=*\n\/\/SYSIN    DD  DUMMY\n\/\/SYSTSIN  DD  *\n   DSN SYSTEM(${p:db2.target.sqlid})\n${Generate Bind Package\/text}\n   END\n\/*\n\/\/*END\n",
+                            "jclString": "\/\/BINDPKG  JOB 'DBB-PKGBIND',MSGLEVEL=(1,1),MSGCLASS=R,NOTIFY=&SYSUID\n\/\/*ROUTE PRINT @JCLPRINT@\n\/\/JOBLIB   DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNEXIT\n\/\/         DD  DISP=SHR,\n\/\/             DSN=${p:db2.hlq}.SDSNLOAD\n\/\/*******************************************\n\/\/* PKGBIND\n\/\/* Step bind packages\n\/\/*******************************************\n\/\/**BEGIN\n\/\/PKGBIND EXEC PGM=IKJEFT01,DYNAMNBR=20,COND=(4,LT)\n\/\/SYSTSPRT DD  SYSOUT=*\n\/\/SYSPRINT DD  SYSOUT=*\n\/\/SYSUDUMP DD  SYSOUT=*\n\/\/SYSIN    DD  DUMMY\n\/\/SYSTSIN  DD  *\nDSN SYSTEM(${p:db2.target.sqlid})\n${Generate Bind Package\/text}\nEND\n\/*\n\/\/*END\n",
                             "jobCard": "${p?:deploy.env.jobstatement}",
                             "explicitTokens": "",
                             "explicitTokensForeachJob": "",
@@ -655,6 +392,7 @@
     }],
     "environments": [{
         "name": "Development",
+        "description": "Development Environment",
         "color": "#00B2EF",
         "requireApprovals": false,
         "noSelfApprovals": false,
@@ -862,27 +600,27 @@
         "rootActivity": {
             "edges": [
                 {
-                    "to": "f8e7ae0d716c6e2a1221f471fe84dc",
-                    "type": "ALWAYS",
+                    "to": "11c9d446ee5a87419c9083d6d67f5c",
+                    "from": "2302d4e4b0bbf8aca87837b1b16748",
+                    "type": "SUCCESS",
                     "value": ""
                 },
                 {
-                    "to": "fe58debdd30d231c24fd724756acff",
-                    "from": "f8e7ae0d716c6e2a1221f471fe84dc",
-                    "type": "SUCCESS",
+                    "to": "2302d4e4b0bbf8aca87837b1b16748",
+                    "type": "ALWAYS",
                     "value": ""
                 }
             ],
             "offsets": [
                 {
-                    "name": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "name": "2302d4e4b0bbf8aca87837b1b16748",
                     "x": -50,
                     "y": 230,
                     "h": 70,
                     "w": 280
                 },
                 {
-                    "name": "fe58debdd30d231c24fd724756acff",
+                    "name": "11c9d446ee5a87419c9083d6d67f5c",
                     "x": -5,
                     "y": 430,
                     "h": 80,
@@ -891,26 +629,36 @@
             ],
             "layoutMode": "auto",
             "type": "graph",
-            "name": "2d4d2005-c80f-4a9e-8fd4-69b0997107ec",
+            "name": "4619700a-dafc-45e1-8d9c-066215d422b7",
             "children": [
                 {
                     "type": "finish",
-                    "name": "fe58debdd30d231c24fd724756acff",
+                    "name": "11c9d446ee5a87419c9083d6d67f5c",
                     "children": []
                 },
                 {
                     "componentName": "GenAppComponent",
-                    "properties": [{
-                        "name": "isIgnoreChildWarnings",
-                        "value": "false"
-                    }],
+                    "properties": [
+                        {
+                            "name": "maxIteration",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "isIgnoreChildWarnings",
+                            "value": "false"
+                        },
+                        {
+                            "name": "failFast",
+                            "value": "false"
+                        }
+                    ],
                     "type": "componentEnvironmentIterator",
-                    "name": "f8e7ae0d716c6e2a1221f471fe84dc",
+                    "name": "2302d4e4b0bbf8aca87837b1b16748",
                     "children": [{
                         "componentName": "GenAppComponent",
                         "status": "Active",
                         "type": "inventoryVersionDiff",
-                        "name": "50fd6f3c-9c6e-433f-ac5d-9d008d447ebf",
+                        "name": "9ce9414b-9634-4dfa-ac71-9f986c461f3e",
                         "children": [{
                             "componentProcessName": "Deploy",
                             "componentName": "GenAppComponent",
@@ -918,7 +666,7 @@
                             "properties": {"isIgnoreChildWarnings": "false"},
                             "draftProperties": {"isIgnoreChildWarnings": "false"},
                             "type": "componentProcess",
-                            "name": "Install: \"GenAppComponent \"",
+                            "name": "Install: \"GenAppComponent\"",
                             "children": []
                         }]
                     }]
