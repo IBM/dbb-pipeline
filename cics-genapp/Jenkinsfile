@@ -126,6 +126,7 @@ pipeline {
         stage('DBB Build') {
             steps {
                 script{
+                    def zUnitContents = []
                     node( zOsAgentLabel ) {
                         if ( env.DBB_BUILD_EXTRA_OPTS != null ) {
                            dbbBuildExtraOpts = env.DBB_BUILD_EXTRA_OPTS
@@ -143,6 +144,21 @@ pipeline {
                         def files = findFiles(glob: "**BUILD-${BUILD_NUMBER}/**/buildList.txt")
                         // Do not enter into some steps if nothing in the build list
                         hasBuildFiles = files.length > 0 && files[0].length > 0
+                        
+                        def zUnitFiles = findFiles(glob: "**BUILD-${BUILD_NUMBER}/**/*.zunit.report.log")
+                        zUnitFiles.each { zUnit ->
+                            println "Process zUnit: $zUnit.path"
+                            def zUnitContent = readFile file: zUnit.path
+                            zUnitContents << zUnitContent
+                        }
+                    }
+                    zUnitContents.each { zUnitContent ->
+                        writeFile file: '/tmp/zUnit.zunit', text:zUnitContent
+                        def rc = sh (returnStatus: true, script: '''#!/bin/sh
+                            curl --silent https://raw.githubusercontent.com/ibm/dbb-pipeline/master/cics-genapp/zUnit/xsl/AZUZ2J30.xsl -o /tmp/AZUZ2J30.xsl
+                            xsltproc /tmp/AZUZ2J30.xsl /tmp/zUnit.zunit > ${WORKSPACE}/zUnit.xml
+                        ''')
+                        junit "zUnit.xml"
                     }
                 }
             }
