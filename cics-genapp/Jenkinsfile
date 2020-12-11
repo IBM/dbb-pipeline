@@ -17,6 +17,7 @@ def dbbHlq=null
 def dbbBuildType='-i'
 def dbbGroovyzOpts= ''
 def dbbBuildExtraOpts= ''
+def dbbCredentialOptions='-id ADMIN -pw ADMIN'
 
 // Artifactory
 def artiCredentialsId = 'artifactory_id'
@@ -30,11 +31,11 @@ def ucdEnv = 'Development'
 def ucdSite = 'UrbanCodeE2EPipeline'
 
 // Verbose
-def verbose = env.VERBOSE && env.VERBOSE == 'true' ? true : false
+def verbose = false
 
 // Private
 def hasBuildFiles = true
-def buildVerbose = verbose ? '-v' : ''
+def buildVerbose = ''
 
 @NonCPS
 String getArtifactoruUrl(String artiUrl) {
@@ -60,6 +61,9 @@ pipeline {
             agent { label zOsAgentLabel }
             steps {
                 script {
+                    // Verbose
+                    verbose = env.VERBOSE && env.VERBOSE == 'true' ? true : false
+                    buildVerbose = verbose ? '-v' : ''
                     if ( verbose ) {
                         echo sh(script: 'env|sort', returnStdout: true)
                     }
@@ -123,10 +127,11 @@ pipeline {
             }
         }
 
-        stage('DBB Build & UnitTest') {
+        stage('DBB Build & UnitTest & Code Coverage') {
             steps {
                 script{
                     def zUnitContents = []
+                    def cccFolder = null
                     node( zOsAgentLabel ) {
                         if ( env.DBB_BUILD_EXTRA_OPTS != null ) {
                            dbbBuildExtraOpts = env.DBB_BUILD_EXTRA_OPTS
@@ -134,13 +139,21 @@ pipeline {
                         if ( env.DBB_BUILD_TYPE != null ) {
                             dbbBuildType = env.DBB_BUILD_TYPE
                         }
+                        if ( env.DBB_CREDENTIAL_OPTIONS != null ) {
+                            dbbCredentialOptions = env.DBB_CREDENTIAL_OPTIONS
+                        }
                         if ( env.GROOVYZ_BUILD_EXTRA_OPTS != null ) {
                             dbbGroovyzOpts = env.GROOVYZ_BUILD_EXTRA_OPTS
+                        }
+                        def dbbZunitCccOpts = ''
+                        if ( env.CCC_HOST != null && env.CCC_PORT != null && env.CCC_FOLDER != null ) {
+                            dbbZunitCccOpts="-cc -cch ${env.CCC_HOST} -ccp ${env.CCC_PORT}"
+                            cccFolder = env.CCC_FOLDER
                         }
                         dbbHome = env.DBB_HOME
                         dbbUrl = env.DBB_URL
                         dbbHlq = env.DBB_HLQ
-                        sh "$dbbHome/bin/groovyz $dbbGroovyzOpts ${WORKSPACE}/dbb-zappbuild/build.groovy --logEncoding UTF-8 -w ${WORKSPACE} --application cics-genapp --sourceDir ${WORKSPACE}/cics-genapp  --workDir ${WORKSPACE}/BUILD-${BUILD_NUMBER} --hlq ${dbbHlq}.GENAPP --url $dbbUrl -pw ADMIN $dbbBuildType $buildVerbose $dbbBuildExtraOpts"
+                        sh "$dbbHome/bin/groovyz $dbbGroovyzOpts ${WORKSPACE}/dbb-zappbuild/build.groovy --logEncoding UTF-8 -w ${WORKSPACE} --application cics-genapp --sourceDir ${WORKSPACE}/cics-genapp  --workDir ${WORKSPACE}/BUILD-${BUILD_NUMBER} --hlq ${dbbHlq}.GENAPP --url $dbbUrl $dbbCredentialOptions -d $dbbBuildType $buildVerbose $dbbZunitCccOpts $dbbBuildExtraOpts"
                         def files = findFiles(glob: "**BUILD-${BUILD_NUMBER}/**/buildList.txt")
                         // Do not enter into some steps if nothing in the build list
                         hasBuildFiles = files.length > 0 && files[0].length > 0
@@ -154,11 +167,21 @@ pipeline {
                     }
                     zUnitContents.each { zUnitContent ->
                         writeFile file: '/tmp/zUnit.zunit', text:zUnitContent
-                        def rc = sh (returnStatus: true, script: '''#!/bin/sh
+                        sh (returnStatus: true, script: '''#!/bin/sh
                             curl --silent https://raw.githubusercontent.com/ibm/dbb-pipeline/master/cics-genapp/zUnit/xsl/AZUZ2J30.xsl -o /tmp/AZUZ2J30.xsl
                             xsltproc /tmp/AZUZ2J30.xsl /tmp/zUnit.zunit > ${WORKSPACE}/zUnit.xml
                         ''')
                         junit "zUnit.xml"
+                    }
+                    if ( cccFolder != null ) {
+                        env.CCC_FOLDER = cccFolder
+                        sh (returnStatus: true, script: '''#!/bin/sh
+                            mkdir -p ${WORKSPACE}/BUILD-${BUILD_NUMBER}
+                            mv -f ${CCC_FOLDER}/*.pdf ${WORKSPACE}/BUILD-${BUILD_NUMBER}
+                        ''')
+                        archiveArtifacts allowEmptyArchive: true,
+                                            artifacts: "BUILD-${BUILD_NUMBER}/*.pdf"
+                                            onlyIfSuccessful: false
                     }
                 }
             }
@@ -184,7 +207,7 @@ pipeline {
                             def artiUrl = getArtifactoruUrl(env.ARTIFACTORY_URL)
                             def repositoryPath = env.ARTIFACTORY_REPO_PATH
                             def ucdBuztool = env.UCD_BUZTOOL_PATH
-                            BUILD_OUTPUT_FOLDER = sh (script: "ls ${WORKSPACE}/BUILD-${BUILD_NUMBER}", returnStdout: true).trim()
+                            BUILD_OUTPUT_FOLDER = sh (script: "ls ${WORKSPACE}/BUILD-${BUILD_NUMBER}  | grep build | sort -u", returnStdout: true).trim()
                             dir("${WORKSPACE}/BUILD-${BUILD_NUMBER}/${BUILD_OUTPUT_FOLDER}") {
                                 withCredentials([usernamePassword(credentialsId: artiCredentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                                     writeFile file: "${WORKSPACE}/BUILD-${BUILD_NUMBER}/artifactoy.properties", encoding: "ibm-1047",
