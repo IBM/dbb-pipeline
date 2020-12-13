@@ -178,9 +178,10 @@ pipeline {
                         sh (returnStatus: true, script: '''#!/bin/sh
                             mkdir -p ${WORKSPACE}/BUILD-${BUILD_NUMBER}
                             mv -f ${CCC_FOLDER}/*.pdf ${WORKSPACE}/BUILD-${BUILD_NUMBER}
+                            mv -f ${CCC_FOLDER}/*.cczip ${WORKSPACE}/BUILD-${BUILD_NUMBER}
                         ''')
                         archiveArtifacts allowEmptyArchive: true,
-                                            artifacts: "BUILD-${BUILD_NUMBER}/*.pdf"
+                                            artifacts: "BUILD-${BUILD_NUMBER}/*.pdf,BUILD-${BUILD_NUMBER}/*.cczip"
                                             onlyIfSuccessful: false
                     }
                 }
