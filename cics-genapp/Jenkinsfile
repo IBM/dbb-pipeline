@@ -180,9 +180,11 @@ pipeline {
                             mv -f ${CCC_FOLDER}/*.pdf ${WORKSPACE}/BUILD-${BUILD_NUMBER}
                             mv -f ${CCC_FOLDER}/*.cczip ${WORKSPACE}/BUILD-${BUILD_NUMBER}
                         ''')
-                        archiveArtifacts allowEmptyArchive: true,
-                                            artifacts: "BUILD-${BUILD_NUMBER}/*.pdf,BUILD-${BUILD_NUMBER}/*.cczip"
+                        dir("${WORKSPACE}/BUILD-${BUILD_NUMBER}") {
+                            archiveArtifacts allowEmptyArchive: true,
+                                            artifacts: "*.pdf,*.cczip"
                                             onlyIfSuccessful: false
+                        }
                     }
                 }
             }
