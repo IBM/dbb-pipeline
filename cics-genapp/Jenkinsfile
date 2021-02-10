@@ -204,6 +204,11 @@ pipeline {
                         }
                     }
                 }
+                unstable {
+                    script{
+                         error ("zUnit tests failed!!!")
+                    }
+                } 
             }
         }
         
