@@ -5,7 +5,7 @@ def linuxAgent = 'master'
 // GIT repositories
 def srcGitRepo =  null
 def srcGitBranch = null
-def zAppBuildGitRepo = 'https://github.com/jbyibm/dbb-zappbuild.git'
+def zAppBuildGitRepo = 'https://github.com/IBM/dbb-zappbuild.git'
 def zAppBuildGitBranch = 'development' // Some important issues are not yet merged into master.
 def dbbGitRepo = 'https://github.com/IBM/dbb.git'
 def dbbGitBranch = 'master'
