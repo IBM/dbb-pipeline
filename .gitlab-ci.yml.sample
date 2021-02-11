@@ -1,0 +1,245 @@
+# Pipeline managed stages
+stages:
+  - Dependencies
+  - Build
+  - CodeReview
+  - Report
+  - Package
+  - Deploy
+    
+# Pipeline global variables
+variables:
+  # Working directory
+  WORKING_DIR: "/u/jyvesb/builds/tuto/$CI_PIPELINE_ID/build"
+  # Report directory
+  REPORT_FOLDER: "/u/jyvesb/builds/tuto/$CI_PIPELINE_ID/report"
+  # DBB related variables
+  DBB_HOME: "/var/usr/lpp/IBM/dbb"
+  DBB_HLQ: "NAZARE.TUTO.GITLAB.GENAPP"
+  DBB_URL: "https://zdevops-demo1.fyre.ibm.com:9443/dbb"
+  # Report related variables (we use sftp to pull the build log/report from the z/OS)
+  # We assume that you have set up ssh key exchange between the distributed system and your z/OS. 
+  # The report will be uploaded only when GITLAB_REPORT_UPLOAD="true". In this case
+  # you must have configured a shell executor as mentioned in the tutorial. 
+  GITLAB_REPORT_UPLOAD: "false"
+  ZOS_SFTP_HOST: "zdevops-demo1.fyre.ibm.com"
+  ZOS_SFTP_PORT: "222"
+  ZOS_SFTP_USER: "jyvesb"
+  # Code Coverage related variables
+  CCC_HOST: "jby-hdc.rpp.hur.hdclab.intranet.ibm.com"
+  CCC_PORT: "8006"
+  CCC_FOLDER : "/home/gitlab-runner/CC"
+  # Code Review related variables
+  RUN_IDZ_CODE_REVIEW  : "true"
+  # Artificatory related variables (password is declared into GibLab group)
+  ARTI_URL: "https://eu.artifactory.swg-devops.com"
+  ARTI_USERNAME: "baudy.jy@fr.ibm.com"
+  ARTI_REPO_PATH: "sys-nazare-sysadmin-generic-local/genapp/ucd/gitlab"
+  # UCD related variables (password is declared into GibLab group)
+  UCD_BUZTOOL_PATH: "/u/jenkins/ucd752/bin/buztool.sh"
+  UCD_URL: "https://9.20.204.183:8443"
+  UCD_USERNAME: "admin"
+  # Default values
+  UCD_APPPLICATION: "GenApp-Deploy"
+  UCD_PROCESS: "Deploy"
+  UCD_ENV: "Development"
+  UCD_COMPONENT: "GenAppComponent"  
+  ARTI_PASSWORD: "$GROUP_ARTI_PASSWORD"
+  UCD_PASSWORD: "$GROUP_UCD_PASSWORD"
+  CI_DEBUG_TRACE: "false"
+  GIT_SSL_NO_VERIFY: "true"
+  DBB_EXTRA_OPTS: "-d -runzTests"
+  DBB_BUILD_TYPE: "-i"
+  DBB_CREDENTIAL_OPTIONS: "-id ADMIN -pw ADMIN"
+
+# This stage will checkout the dbb project for DBB Build
+dbb:
+  stage: Dependencies
+  trigger:
+    project: "jbyibm-tutorial-doc/dbb"
+    branch: master
+    strategy: depend
+
+# This stage will checkout the dbb-zappbuild project for DBB Build
+zAppBuild:
+  stage: Dependencies
+  trigger:
+    project: "jbyibm-tutorial-doc/dbb-zappbuild"
+    branch: development
+    strategy: depend
+
+# This stage on the z/OS perform the DBB build
+DBB Build:
+  stage: Build
+  dependencies: []  
+  before_script:
+  - |
+    # Cleanup build and report folders
+    rm -rf $WORKING_DIR
+    mkdir -p $WORKING_DIR
+    rm -rf $REPORT_FOLDER
+    mkdir -p $REPORT_FOLDER
+  script:
+  - |
+    #env
+    rc=0
+    if [ ! -z "$CCC_HOST" ] && [ ! -z "$CCC_PORT" ] && [ ! -z "$CCC_FOLDER" ]
+    then
+      DBB_CCC_OPTS="-cc -cch ${CCC_HOST} -ccp ${CCC_PORT}"
+    fi
+    set +e
+    set -o xtrace
+    $DBB_HOME/bin/groovyz\
+      $PWD/../dbb-zappbuild/build.groovy\
+      --application cics-genapp\
+      --logEncoding UTF-8 -w $PWD --sourceDir $PWD --workDir $WORKING_DIR\
+      --hlq ${DBB_HLQ} --url $DBB_URL $DBB_CREDENTIAL_OPTIONS $DBB_BUILD_TYPE $DBB_EXTRA_OPTS $DBB_CCC_OPTS
+    rc=$?
+    set +o xtrace
+    cp $WORKING_DIR/*/*.log $REPORT_FOLDER
+    cp $WORKING_DIR/*/*.json $REPORT_FOLDER
+    cp $WORKING_DIR/*/*.html $REPORT_FOLDER
+    for file in $(find $WORKING_DIR -name "*.zunit.report.log")
+    do
+      iconv -t IBM-1047 -f ISO8859-1 $file > $file.ibm1047.log
+      chtag -r  $file.ibm1047.log
+      grep -q "FINISHED EXECUTION RC=04" $file.ibm1047.log
+      if [ $? == 0 ]
+      then
+        rc=1
+      fi
+    done 
+    exit $rc
+  tags:
+    - zos-ssh
+    
+# This stage on the z/OS perform IDz code review
+IDz Code Review:
+  stage: CodeReview
+  dependencies: []  
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  only :
+    variables:
+      - $RUN_IDZ_CODE_REVIEW == 'true'
+  script:
+  - |
+    # env
+    rc=0
+    BUILD_OUTPUT_FOLDER=$(ls $WORKING_DIR  | grep build | sort -u)
+    set -o xtrace
+    $DBB_HOME/bin/groovyz \
+        $PWD/../dbb/Pipeline/RunIDZCodeReview/RunCodeReview.groovy\
+        --workDir $WORKING_DIR/$BUILD_OUTPUT_FOLDER\
+        -cr  $PWD/cics-genapp/cr-rules/CodeReviewRules.dat\
+        -ccr $PWD/cics-genapp/cr-rules/CodeReviewRules.ccr
+    rc=$?
+    set +o xtrace
+    if [ -f $WORKING_DIR/$BUILD_OUTPUT_FOLDER/CodeReviewJUNIT.xml ]
+    then
+        cp $WORKING_DIR/$BUILD_OUTPUT_FOLDER/CodeReviewJUNIT.xml $REPORT_FOLDER
+    fi
+    exit $rc
+  tags:
+    - zos-ssh
+
+# This stage on the gitlab-runner instance pull the logs
+# and zUnit outputs from the z/OS and publish then
+# back to the GitLab CI pipeline board.
+Build Report:
+  stage: Report
+  dependencies: []
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  only :
+    variables:
+      - $GITLAB_REPORT_UPLOAD == 'true'    
+  script:
+  - |
+    mkdir build_$CI_PIPELINE_ID
+    cd build_$CI_PIPELINE_ID
+    sftp -o "StrictHostKeyChecking=no" -P $ZOS_SFTP_PORT $ZOS_SFTP_USER@$ZOS_SFTP_HOST<<EOF
+    mget $REPORT_FOLDER/*
+    EOF
+    set +e
+    set -o xtrace
+    for file in $(find . -name "*.zunit.report.log")
+    do
+      xsltproc $CI_PROJECT_DIR/cics-genapp/zUnit/xsl/AZUZ2J30.xsl $file > $(basename $file).xml
+      grep -q "FINISHED EXECUTION RC=04" $(basename $file).xml
+      _rc=$?
+      echo "zUnit result for $file: $rc"
+      if [ $_rc -eq 0 ] 
+      then
+        echo "zUnit falied for: $file!!!"
+        rc=1
+      fi
+    done
+    mv -f $CCC_FOLDER/*.pdf .
+    mv -f $CCC_FOLDER/*.cczip .
+    set -e
+  artifacts:
+    name: "report-${CI_PIPELINE_ID}"
+    when: always
+    paths:
+      - "build_${CI_PIPELINE_ID}/"
+    reports:
+      junit: "build_$CI_PIPELINE_ID/*.xml"
+  tags:
+    - dist-shell
+    
+# This stage on the z/OS build the UCD package/version
+UCD Package:
+  stage: Package
+  dependencies: []  
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  script:
+  - |
+    # env
+    rc=0
+    cat <<EOF >> $WORKING_DIR/artifactoy.properties
+    Repository_type=artifactory
+    username=$ARTI_USERNAME
+    password=$ARTI_PASSWORD
+    repository=$ARTI_REPO_PATH
+    url=$ARTI_URL
+    EOF
+    
+    BUILD_OUTPUT_FOLDER=$(ls $WORKING_DIR  | grep build | sort -u)
+    set -o xtrace
+    $DBB_HOME/bin/groovyz \
+        $PWD/../dbb/Pipeline/CreateUCDComponentVersion/dbb-ucd-packaging.groovy\
+      --buztool $UCD_BUZTOOL_PATH --component $UCD_COMPONENT\
+      --workDir $WORKING_DIR/$BUILD_OUTPUT_FOLDER\
+      -ar $WORKING_DIR/artifactoy.properties
+    rc=$?
+    set +o xtrace
+    exit $rc
+  tags:
+    - zos-ssh
+    
+# This stage on the z/OS deploy the UCD package/version
+UCD Deploy:
+  stage: Deploy
+  dependencies: []  
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  script:
+  - |
+    # env
+    rc=0
+    set -o xtrace
+    $DBB_HOME/bin/groovyz \
+        $PWD/../dbb/Pipeline/DeployUCDComponentVersion/ucd-deploy.groovy\
+       -a "$UCD_APPPLICATION" -e "$UCD_ENV" -U $UCD_USERNAME -P $UCD_PASSWORD\
+       -u $UCD_URL -d "$UCD_COMPONENT:latest" -p "$UCD_PROCESS" -k
+    rc=$?
+    set +o xtrace
+    exit $rc
+  tags:
+    - zos-ssh
