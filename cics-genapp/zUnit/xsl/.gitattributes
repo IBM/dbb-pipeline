@@ -1,0 +1,5 @@
+# line endings
+* text eol=lf
+
+# file encodings
+*.xsl zos-working-tree-encoding=utf-8 git-encoding=utf-8
