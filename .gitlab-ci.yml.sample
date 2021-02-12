@@ -9,66 +9,76 @@ stages:
     
 # Pipeline global variables
 variables:
-  # Working directory
-  WORKING_DIR: "/u/jyvesb/builds/tuto/$CI_PIPELINE_ID/build"
-  # Report directory
-  REPORT_FOLDER: "/u/jyvesb/builds/tuto/$CI_PIPELINE_ID/report"
+  # Variables to active or disable zUnit/Code Coverage/Code Review and Report features.
+  RUN_ZUNIT_TEST: "false"
+  RUN_CODE_COVERAGE: "false"
+  RUN_IDZ_CODE_REVIEW  : "false"
+  GITLAB_REPORT_UPLOAD: "false"
+  
+  # z/OS Working directory
+  WORKING_DIR: "/u/jyvesb/builds/tuto/work/$CI_PIPELINE_ID"
+
+  # z/OS Report directory
+  REPORT_FOLDER: "/u/jyvesb/builds/tuto/report/$CI_PIPELINE_ID"
+
   # DBB related variables
-  DBB_HOME: "/var/usr/lpp/IBM/dbb"
+  DBB_HOME: "/usr/lpp/IBM/dbb"
   DBB_HLQ: "NAZARE.TUTO.GITLAB.GENAPP"
-  DBB_URL: "https://zdevops-demo1.fyre.ibm.com:9443/dbb"
+  DBB_URL: "https://example.com:9443/dbb"
+
+  # Artificatory related variables (password is declared into your GibLab group)
+  ARTI_URL: "https://example.com"
+  ARTI_USERNAME: "arti-id"
+  ARTI_REPO_PATH: "arti-repo-generic-local/genapp/ucd/gitlab"
+
+  # UCD related variables (password is declared into your GibLab group)
+  UCD_BUZTOOL_PATH: "/usr/lpp/IBM/ucd/bin/buztool.sh"
+  UCD_URL: "https://example.com:8443"
+  UCD_USERNAME: "ucd-id"
+
+  # Code Coverage related variables only if RUN_CODE_COVERAGE: "true" and RUN_ZUNIT_TEST: "true"
+  CCC_INSTALL_FOLDER: "/usr/lpp/IBM/debug/headless-code-coverage"
+  
   # Report related variables (we use sftp to pull the build log/report from the z/OS)
   # We assume that you have set up ssh key exchange between the distributed system and your z/OS. 
   # The report will be uploaded only when GITLAB_REPORT_UPLOAD="true". In this case
-  # you must have configured a shell executor as mentioned in the tutorial. 
-  GITLAB_REPORT_UPLOAD: "false"
-  ZOS_SFTP_HOST: "zdevops-demo1.fyre.ibm.com"
-  ZOS_SFTP_PORT: "222"
-  ZOS_SFTP_USER: "jyvesb"
-  # Code Coverage related variables
-  CCC_HOST: "jby-hdc.rpp.hur.hdclab.intranet.ibm.com"
-  CCC_PORT: "8006"
-  CCC_FOLDER : "/home/gitlab-runner/CC"
-  # Code Review related variables
-  RUN_IDZ_CODE_REVIEW  : "true"
-  # Artificatory related variables (password is declared into GibLab group)
-  ARTI_URL: "https://eu.artifactory.swg-devops.com"
-  ARTI_USERNAME: "baudy.jy@fr.ibm.com"
-  ARTI_REPO_PATH: "sys-nazare-sysadmin-generic-local/genapp/ucd/gitlab"
-  # UCD related variables (password is declared into GibLab group)
-  UCD_BUZTOOL_PATH: "/u/jenkins/ucd752/bin/buztool.sh"
-  UCD_URL: "https://9.20.204.183:8443"
-  UCD_USERNAME: "admin"
-  # Default values
+  # you must have configured a GitLab runner shell executor as mentioned in the online tutorial. 
+  ZOS_SFTP_HOST: "your-zos-host"
+  ZOS_SFTP_PORT: "22"
+  ZOS_SFTP_USER: "zos-id"
+
+  # Default values for the tutorial
   UCD_APPPLICATION: "GenApp-Deploy"
   UCD_PROCESS: "Deploy"
   UCD_ENV: "Development"
   UCD_COMPONENT: "GenAppComponent"  
   ARTI_PASSWORD: "$GROUP_ARTI_PASSWORD"
   UCD_PASSWORD: "$GROUP_UCD_PASSWORD"
-  CI_DEBUG_TRACE: "false"
-  GIT_SSL_NO_VERIFY: "true"
-  DBB_EXTRA_OPTS: "-d -runzTests"
+  DBB_EXTRA_OPTS: "-d"
   DBB_BUILD_TYPE: "-i"
   DBB_CREDENTIAL_OPTIONS: "-id ADMIN -pw ADMIN"
+  CCC_HOST: "127.0.0.1"
+  CCC_PORT: "8006"
+  GIT_SSL_NO_VERIFY: "true"
+  CI_DEBUG_TRACE: "false"
 
-# This stage will checkout the dbb project for DBB Build
+# This stage will checkout the GitLab dbb project for DBB Build
 dbb:
   stage: Dependencies
   trigger:
-    project: "jbyibm-tutorial-doc/dbb"
+    project: "YOUR_GIT_LAB_GROUP/dbb"
     branch: master
     strategy: depend
 
-# This stage will checkout the dbb-zappbuild project for DBB Build
+# This stage will checkout the GitLab dbb-zappbuild project for DBB Build
 zAppBuild:
   stage: Dependencies
   trigger:
-    project: "jbyibm-tutorial-doc/dbb-zappbuild"
+    project: "YOUR_GIT_LAB_GROUP/dbb-zappbuild"
     branch: development
     strategy: depend
 
-# This stage on the z/OS perform the DBB build
+# This stage on the z/OS perform the DBB build with zUnit and Code Coverage (optional)
 DBB Build:
   stage: Build
   dependencies: []  
@@ -79,21 +89,30 @@ DBB Build:
     mkdir -p $WORKING_DIR
     rm -rf $REPORT_FOLDER
     mkdir -p $REPORT_FOLDER
+    if [ "$RUN_CODE_COVERAGE" == "true" ] && [ "$RUN_ZUNIT_TEST" == "true" ]
+    then
+      $CCC_INSTALL_FOLDER/bin/ccstart.sh -port=$CCC_PORT -exportertype=CCPDF > $WORKING_DIR/ccc.log&
+    fi
   script:
   - |
     #env
     rc=0
-    if [ ! -z "$CCC_HOST" ] && [ ! -z "$CCC_PORT" ] && [ ! -z "$CCC_FOLDER" ]
+    if [ "$RUN_CODE_COVERAGE" == "true" ] && [ "$RUN_ZUNIT_TEST" == "true" ]
     then
       DBB_CCC_OPTS="-cc -cch ${CCC_HOST} -ccp ${CCC_PORT}"
     fi
+    
+    if [ "$RUN_ZUNIT_TEST" == "true" ]
+    then
+      DBB_ZUNIT_OPTS="-runzTests"
+    fi    
     set +e
     set -o xtrace
     $DBB_HOME/bin/groovyz\
       $PWD/../dbb-zappbuild/build.groovy\
       --application cics-genapp\
       --logEncoding UTF-8 -w $PWD --sourceDir $PWD --workDir $WORKING_DIR\
-      --hlq ${DBB_HLQ} --url $DBB_URL $DBB_CREDENTIAL_OPTIONS $DBB_BUILD_TYPE $DBB_EXTRA_OPTS $DBB_CCC_OPTS
+      --hlq ${DBB_HLQ} --url $DBB_URL $DBB_CREDENTIAL_OPTIONS $DBB_BUILD_TYPE $DBB_EXTRA_OPTS $DBB_CCC_OPTS $DBB_ZUNIT_OPTS
     rc=$?
     set +o xtrace
     cp $WORKING_DIR/*/*.log $REPORT_FOLDER
@@ -109,11 +128,17 @@ DBB Build:
         rc=1
       fi
     done 
+    if [ "$RUN_CODE_COVERAGE" == "true" ] && [ "$RUN_ZUNIT_TEST" == "true" ]
+    then
+      mv -f $HOME/CC/*.pdf $REPORT_FOLDER
+      mv -f $HOME/CC/*.cczip $REPORT_FOLDER
+      $CCC_INSTALL_FOLDER/bin/ccstop.sh $CCC_PORT >> $WORKING_DIR/ccc.log
+    fi
     exit $rc
   tags:
     - zos-ssh
     
-# This stage on the z/OS perform IDz code review
+# This stage on the z/OS perform IDz code review (optional)
 IDz Code Review:
   stage: CodeReview
   dependencies: []  
@@ -146,13 +171,10 @@ IDz Code Review:
 
 # This stage on the gitlab-runner instance pull the logs
 # and zUnit outputs from the z/OS and publish then
-# back to the GitLab CI pipeline board.
+# back to the GitLab CI pipeline board (optional).
 Build Report:
   stage: Report
   dependencies: []
-  variables:
-    GIT_STRATEGY: none
-    GIT_CHECKOUT: "false"
   only :
     variables:
       - $GITLAB_REPORT_UPLOAD == 'true'    
@@ -177,8 +199,6 @@ Build Report:
         rc=1
       fi
     done
-    mv -f $CCC_FOLDER/*.pdf .
-    mv -f $CCC_FOLDER/*.cczip .
     set -e
   artifacts:
     name: "report-${CI_PIPELINE_ID}"
