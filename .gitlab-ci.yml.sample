@@ -195,7 +195,7 @@ Build Report:
       echo "zUnit result for $file: $rc"
       if [ $_rc -eq 0 ] 
       then
-        echo "zUnit falied for: $file!!!"
+        echo "zUnit failed for: $file!!!"
         rc=1
       fi
     done
